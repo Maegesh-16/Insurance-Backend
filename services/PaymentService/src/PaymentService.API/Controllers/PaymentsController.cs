@@ -6,7 +6,7 @@ namespace PaymentService.API.Controllers;
 
 [ApiController]
 [Route("api/payments")]
-[Authorize]
+
 public class PaymentsController(IPaymentManagementService paymentService) : ControllerBase
 {
     [HttpGet]
