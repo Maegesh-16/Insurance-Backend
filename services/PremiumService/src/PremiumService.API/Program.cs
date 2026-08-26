@@ -89,7 +89,14 @@ if (app.Environment.IsDevelopment())
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<PremiumDbContext>();
-    dbContext.Database.Migrate();
+    try
+    {
+        dbContext.Database.Migrate();
+    }
+    catch (Exception exception)
+    {
+        app.Logger.LogError(exception, "Premium database migration failed during startup.");
+    }
 }
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
