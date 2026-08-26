@@ -25,6 +25,7 @@ public class GlobalExceptionMiddleware(
             var detail = environment.IsDevelopment()
                 ? ex.Message
                 : "An unexpected error occurred.";
+            Console.WriteLine(ex);
             await WriteErrorAsync(context, StatusCodes.Status500InternalServerError, "Internal server error", detail);
         }
     }
