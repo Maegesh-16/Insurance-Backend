@@ -7,7 +7,10 @@ using Microsoft.OpenApi.Models;
 using PaymentService.API.Middleware;
 using PaymentService.Infrastructure;
 using PaymentService.Infrastructure.Persistence;
-
+// Force polling file watcher - reduces inotify usage
+AppContext.SetSwitch("Microsoft.AspNetCore.Hosting.SuppressStatusMessages", true);
+Environment.SetEnvironmentVariable("DOTNET_USE_POLLING_FILE_WATCHER", "1");
+Environment.SetEnvironmentVariable("DOTNET_WATCH_SUPPRESS_EMOJIS", "1");
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
