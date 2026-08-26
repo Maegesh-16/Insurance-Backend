@@ -14,7 +14,7 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
         catch (ValidationException ex)
         {
             logger.LogWarning(ex, "Validation error while processing request");
-            await WriteErrorAsync(context, StatusCodes.Status400BadRequest, "Validation error", ex.Message);
+            await WriteErrorAsync(context, StatusCodes.Status400BadRequest, "Validation error", ex.ToString());
         }
         catch (Exception ex)
         {
