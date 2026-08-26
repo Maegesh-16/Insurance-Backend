@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+**/appsettings.Development.local.json
+**/appsettings.Production.local.json
+**/bin/
+**/obj/
