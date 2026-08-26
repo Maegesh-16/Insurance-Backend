@@ -1,0 +1,57 @@
+services:
+  - type: web
+    name: insurance-notification-service
+    runtime: docker
+    plan: free
+    dockerContext: ./services/NotificationService
+    dockerfilePath: ./services/NotificationService/Containerfile
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__NotificationDb
+        sync: false
+      - key: Jwt__Issuer
+        value: Insurance.Identity
+      - key: Jwt__Audience
+        value: Insurance.Services
+      - key: Jwt__Key
+        sync: false
+
+  - type: web
+    name: insurance-payment-service
+    runtime: docker
+    plan: free
+    dockerContext: ./services/PaymentService
+    dockerfilePath: ./services/PaymentService/Containerfile
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__PaymentDb
+        sync: false
+      - key: Jwt__Issuer
+        value: Insurance.Identity
+      - key: Jwt__Audience
+        value: Insurance.Services
+      - key: Jwt__Key
+        sync: false
+
+  - type: web
+    name: insurance-premium-service
+    runtime: docker
+    plan: free
+    dockerContext: ./services/PremiumService
+    dockerfilePath: ./services/PremiumService/Containerfile
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__PremiumDb
+        sync: false
+      - key: Jwt__Issuer
+        value: Insurance.Identity
+      - key: Jwt__Audience
+        value: Insurance.Services
+      - key: Jwt__Key
+        sync: false
